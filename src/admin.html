@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>管理页面</title>
 </head>
 
 <body>
     <script src="../vendors/av-min.js"></script>
+    <script src="../vendors/plupload.full.min.js"></script>
+    <script src="../vendors/qiniu.min.js"></script>
     <script>
-        var { Query, User } = AV;
         var APP_ID = 'uznNPGVULmWdd3NfqmTYpENm-gzGzoHsz';
         var APP_KEY = '4QCTv991uRqE7exNLXPgMcbk';
         AV.init({
@@ -19,13 +20,7 @@
             appKey: APP_KEY
         });
 
-        var TestObject = AV.Object.extend('TestObject');
-        var testObject = new TestObject();
-        testObject.save({
-            words: 'Hello World!'
-        }).then(function (object) {
-            alert('LeanCloud Rocks!');
-        })
+        
     </script>
 </body>
 
