@@ -49,12 +49,13 @@
 
                     },
                     'FileUploaded': function (up, file, info) {
-
                         var domain = up.getOption('domain');
                         var response = JSON.parse(info.response);
                         var sourceLink = domain + '/' + encodeURIComponent(response.key);
-                        console.log(sourceLink)
-                        console.log(response.key)
+                        window.eventHub.emit('upload', {link: sourceLink, key: response.key})
+                        //命名空间实现模块数据交互
+                        // window.app.newSong.active()
+                        // window.app.songForm.reset({link: sourceLink, key: response.key})
                     },
                     'Error': function (up, err, errTip) {
                         //上传出错时,处理相关的事情

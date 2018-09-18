@@ -12,7 +12,15 @@
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+            window.eventHub.on('upload', (data)=>{
+                this.active()
+            })
+        },
+        active(){
+            $(this.view.el).addClass('active')
         }
     }
     controller.init(view, model)
+    //命名空间实现模块数据交互
+    // window.app.newSong = controller
 }
