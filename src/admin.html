@@ -11,6 +11,8 @@
     <div id="container">
         <button id="pickfiles">上传文件</button>
     </div>
+    <div id="upload"></div>
+    <script src="../vendors/jquery.min.js"></script>
     <script src="../vendors/av-min.js"></script>
     <script src="../vendors/plupload.full.min.js"></script>
     <script src="../vendors/qiniu.min.js"></script>
@@ -22,18 +24,12 @@
             appKey: APP_KEY
         });
 
-
         var uploader = Qiniu.uploader({
-            disable_statistics_report: false,   // 禁止自动发送上传统计信息到七牛，默认允许发送
             runtimes: 'html5',      // 上传模式,依次退化
             browse_button: 'pickfiles',         // 上传选择的点选按钮，**必需**
-            uptoken_url: '/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
+            uptoken_url: 'http://localhost:8888/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
             get_new_uptoken: false,             // 设置上传文件的时候是否每次都重新获取新的 uptoken
-            // downtoken_url: '/downtoken',
-            // Ajax请求downToken的Url，私有空间时使用,JS-SDK 将向该地址POST文件的key和domain,服务端返回的JSON必须包含`url`字段，`url`值为该文件的下载地址
-            // unique_names: true,              // 默认 false，key 为文件名。若开启该选项，JS-SDK 会为每个文件自动生成key（文件名）
-            // save_key: true,                  // 默认 false。若在服务端生成 uptoken 的上传策略中指定了 `save_key`，则开启，SDK在前端将不对key进行任何处理
-            domain: '<Your bucket domain>',     // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
+            domain: 'http://pf8otoovm.bkt.clouddn.com',     // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
             container: 'container',             // 上传区域 DOM ID，默认是 browser_button 的父元素，
             max_file_size: '40mb',             // 最大文件体积限制
             max_retries: 3,                     // 上传失败最大重试次数
@@ -52,8 +48,10 @@
                 },
                 'UploadProgress': function (up, file) {
                     // 每个文件上传时,处理相关的事情
+                    upload.textContent = '上传中'
                 },
                 'FileUploaded': function (up, file, info) {
+                    upload.textContent = '上传成功'
                     // 每个文件上传成功后,处理相关的事情
                     // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
                     // {
@@ -82,11 +80,6 @@
                 }
             }
         });
-
-// domain 为七牛空间（bucket)对应的域名，选择某个空间后，可通过"空间设置->基本设置->域名设置"查看获取
-
-// uploader 为一个 plupload 对象，继承了所有 plupload 的方法，参考http://plupload.com/docs
-
     </script>
 </body>
 

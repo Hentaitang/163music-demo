@@ -26,18 +26,18 @@ var server = http.createServer(function (request, response) {
         response.statusCode = 200
         response.setHeader('Content-Type', 'text/json;charset=utf-8')
         response.setHeader('Access-Control-Allow-Origin', '*')
-        var configKey = fs.readFile('./config_key.json', 'utf8')
+        var configKey = fs.readFileSync('./config_key.json')
         configKey = JSON.parse(configKey)
         let { accessKey, secretKey } = configKey
         var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
         var options = {
-            scope: bucket,
+            scope: '163music-demo',
         };
         var putPolicy = new qiniu.rs.PutPolicy(options);
         var uploadToken = putPolicy.uploadToken(mac);
         response.write(`
     {
-      "uptopken": "${uploadToken}"
+      "uptoken": "${uploadToken}"
     }
     `)
         response.end()
