@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,53 @@
     <link rel="stylesheet" href="./css/default.css">
     <title>管理页面</title>
 </head>
+
 <body>
-    <div id="container">
-        <div id="pickfiles">
-            <span>点击或拖拽文件<span>
-            <p>文件大小不能超过 40MB</p>
-        </div>
+    <div class="page">
+        <aside class="sidebar">
+            <div class="newSong active">新建歌曲</div>
+            <ul class="songList">
+                <li><div>歌曲1</div></li>
+                <li><div>歌曲2</div></li>
+                <li><div>歌曲3</div></li>
+                <li class="active"><div>歌曲4</div></li>
+                <li><div>歌曲5</div></li>
+                <li><div>歌曲6</div></li>
+                <li><div>歌曲7</div></li>
+                <li><div>歌曲8</div></li>
+                <li><div>歌曲9</div></li>
+                <li><div>歌曲10</div></li>
+            </ul>
+            <div class="upload">
+                <div id="container">
+                    <div id="pickfiles">
+                        <span>点击或拖拽文件</span>
+                        <p>文件大小不能超过 40MB</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main>
+            <form class="form">
+                <div class="row">
+                    <label for="songName">歌名</label>
+                    <input type="text" id="songName">
+                </div>
+                <div class="row">
+                    <label for="singer">歌手</label>
+                    <input type="text" id="singer">
+                </div>
+                <div class="row">
+                    <label for="url">链接</label>
+                    <input type="text" id="url">
+                </div>
+                <div class="row">
+                    <input type="submit" value="保存">
+                </div>
+            </form>
+        </main>
     </div>
-    <div id="upload"></div>
+
     <script src="../vendors/jquery.min.js"></script>
     <script src="../vendors/av-min.js"></script>
     <script src="../vendors/plupload.full.min.js"></script>
@@ -51,35 +91,21 @@
                 },
                 'UploadProgress': function (up, file) {
                     // 每个文件上传时,处理相关的事情
-                    upload.textContent = '上传中'
+
                 },
                 'FileUploaded': function (up, file, info) {
-                    upload.textContent = '上传成功'
-                    // 每个文件上传成功后,处理相关的事情
-                    // 其中 info.response 是文件上传成功后，服务端返回的json，形式如
-                    // {
-                    //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
-                    //    "key": "gogopher.jpg"
-                    //  }
-                    // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-                    // var domain = up.getOption('domain');
-                    // var res = parseJSON(info.response);
-                    // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+                    var domain = up.getOption('domain');
+                    var response = JSON.parse(info.response);
+                    var sourceLink = domain + '/' + encodeURIComponent(response.key);
+                    console.log(sourceLink)
+                    console.log(response.key)
                 },
                 'Error': function (up, err, errTip) {
                     //上传出错时,处理相关的事情
                 },
                 'UploadComplete': function () {
                     //队列文件处理完毕后,处理相关的事情
-                },
-                'Key': function (up, file) {
-                    // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-                    // 该配置必须要在 unique_names: false , save_key: false 时才生效
-
-                    var key = "";
-                    // do something with key here
-                    return key
                 }
             }
         });
