@@ -8,6 +8,7 @@ body{
     font-size: 12px;
     line-height: 1.5;
 }
+input{font: inherit; outline: none;}
 
 /* layout */
 .page{
@@ -23,7 +24,8 @@ body{
 
 .page > main{
     flex-grow: 1;
-    border: 1px solid green;
+    background-color: #d4d4d4;
+    padding-left: 20px;
 }
 
 .page > aside > .newSong{
@@ -51,8 +53,9 @@ body{
     background-color: #d4d4d4;
 }
 
-.page > aside > .upload{
-   
+.page > aside > .songList > li.pre-active > div{
+    margin: 0;
+    padding: 10px 20px;
 }
 
 .page > aside > .upload > #container{
@@ -70,4 +73,42 @@ body{
     height: 100%;
     padding: 20px;
     text-align: center;
+}
+
+.page > main > .form{
+    padding-top: 20px;
+}
+
+.page > main > .form > .row{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+}
+
+.page > main > .form > .row.active{
+    margin-left: calc(4em + 5px);
+}
+
+.page > main > .form > .row > label{
+    text-align: right;
+    margin-right: 5px;
+    width: 4em;
+}
+
+.page > main > .form > .row > input[type="text"]{
+    padding: 3px 8px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    height: 30px;
+}
+
+.page > main > .form > .row > input[type="submit"],
+.page > main > .form > .row > input[type="button"],
+.page > main > .form > .row > button{
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #333;
 }

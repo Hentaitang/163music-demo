@@ -16,7 +16,7 @@
             <ul class="songList">
                 <li><div>歌曲1</div></li>
                 <li><div>歌曲2</div></li>
-                <li><div>歌曲3</div></li>
+                <li class="pre-active"><div>歌曲3</div></li>
                 <li class="active"><div>歌曲4</div></li>
                 <li><div>歌曲5</div></li>
                 <li><div>歌曲6</div></li>
@@ -35,6 +35,7 @@
             </div>
         </aside>
         <main>
+            <h1>新建歌曲</h1>
             <form class="form">
                 <div class="row">
                     <label for="songName">歌名</label>
@@ -48,7 +49,7 @@
                     <label for="url">链接</label>
                     <input type="text" id="url">
                 </div>
-                <div class="row">
+                <div class="row active">
                     <input type="submit" value="保存">
                 </div>
             </form>
