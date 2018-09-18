@@ -37,23 +37,26 @@ input{font: inherit; outline: none;}
     background-color: #d4d4d4;
 }
 
-.page > aside > .songList{
-    border-top: 1px solid #999;
+.page > aside .songList-container{
     flex-grow: 1;
 }
 
-.page > aside > .songList > li > div{
+.page > aside  .songList{
+    border-top: 1px solid #999;
+}
+
+.page > aside  .songList > li > div{
     border-bottom: 1px solid #ddd;
     padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.page > aside > .songList > li.active{
+.page > aside  .songList > li.active{
     background-color: #d4d4d4;
 }
 
-.page > aside > .songList > li.pre-active > div{
+.page > aside  .songList > li.pre-active > div{
     margin: 0;
     padding: 10px 20px;
 }
