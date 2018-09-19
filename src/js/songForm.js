@@ -6,38 +6,76 @@
         <form class="form">
             <div class="row">
                 <label for="songName">歌名</label>
-                <input type="text" id="songName" value="__key__">
+                <input name="name" type="text" id="songName" value="__name__">
             </div>
             <div class="row">
                 <label for="singer">歌手</label>
-                <input type="text" id="singer">
+                <input name="singer" type="text" id="singer" value="__singer__">
             </div>
             <div class="row">
                 <label for="url">链接</label>
-                <input type="text" id="url" value="__link__">
+                <input name="url" type="text" id="url" value="__url__">
             </div>
             <div class="row active">
                 <input type="submit" value="保存">
             </div>
         </form>
         `,
-        render(data = {}){
-            let placeholders = ['key', 'link']
+        render(data = {}) {
+            let placeholders = ['name', 'singer', 'url', 'id']
             let html = this.template
-            placeholders.map((string)=>{
+            placeholders.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
+        },
+        reset(){
+            this.render({})
         }
     }
-    let model = {}
+    let model = {
+        data: { name: '', singer: '', url: '', id: '' },
+        create(data) {
+            var Song = AV.Object.extend('Song');
+            var song = new Song();
+            song.set('name', data.name);
+            song.set('singer', data.singer);
+            song.set('url', data.url);
+            return song.save().then((newSong) => {
+                let {id, attributes} = newSong
+                Object.assign(this.data, {
+                    id,
+                    ...attributes
+                })
+            }, (error) => {
+                console.error(error);
+            });
+        }
+    }
     let controller = {
-        init(view, model){
+        init(view, model) {
             this.view = view
             this.model = model
+            this.bindEvent()
             this.view.render(this.model.data)
-            window.eventHub.on('upload', (data)=>{
+            window.eventHub.on('upload', (data) => {
                 this.view.render(data)
+            })
+        },
+        bindEvent() {
+            $(this.view.el).on('submit', 'form', (e) => {
+                e.preventDefault()
+                let data = {}
+                let needs = 'name singer url'.split(' ')
+                needs.map((string) => {
+                    data[string] = $(this.view.el).find(`[name="${string}"]`).val()
+                })
+                this.model.create(data).then(()=>{
+                    this.view.reset()
+                    let string = JSON.stringify(this.model.data)
+                    let object = JSON.parse(string)
+                    window.eventHub.emit('create', object)
+                })
             })
         }
         // reset(data){

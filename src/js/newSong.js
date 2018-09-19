@@ -12,12 +12,19 @@
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+            this.active()
             window.eventHub.on('upload', (data)=>{
                 this.active()
+            })
+            window.eventHub.on('create', (data)=>{
+                this.clearActive()
             })
         },
         active(){
             $(this.view.el).addClass('active')
+        },
+        clearActive(){
+            $(this.view.el).removeClass('active')
         }
     }
     controller.init(view, model)

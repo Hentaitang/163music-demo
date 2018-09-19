@@ -52,7 +52,7 @@
                         var domain = up.getOption('domain');
                         var response = JSON.parse(info.response);
                         var sourceLink = domain + '/' + encodeURIComponent(response.key);
-                        window.eventHub.emit('upload', {link: sourceLink, key: response.key})
+                        window.eventHub.emit('upload', {url: sourceLink, name: response.key})
                         //命名空间实现模块数据交互
                         // window.app.newSong.active()
                         // window.app.songForm.reset({link: sourceLink, key: response.key})
