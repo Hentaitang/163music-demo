@@ -11,6 +11,45 @@ body{
 input{font: inherit; outline: none;}
 
 /* layout */
+
+.topNavBar{
+    height: 60px;
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.topNavBar .logo{
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    margin-top: -3px;
+}
+
+.topNavBar .logo img{
+    height: 20px;
+    width: 117px;
+}
+
+.topNavBar .logo span{
+    font-size: 16px;
+    color: #999;
+}
+
+.topNavBar .logo span::before{
+    content: '';
+    display: inline-block;
+    height: 14px;
+    width: 1px;
+    margin: 0 8px 0 8px;
+    background-color: #E7EAF3;
+}
+
 .page{
     display: flex;
     height: 100vh;
@@ -20,12 +59,14 @@ input{font: inherit; outline: none;}
     width: 200px;
     display: flex;
     flex-direction: column;
+    margin-top: 60px;
 }
 
 .page > main{
     flex-grow: 1;
-    background-color: #d4d4d4;
+    background-color: #FAFAFA;
     padding-left: 20px;
+    margin-top: 60px;
 }
 
 .page > aside > .newSong{
@@ -39,6 +80,19 @@ input{font: inherit; outline: none;}
 
 .page > aside .songList-container{
     flex-grow: 1;
+    overflow: auto;
+}
+
+.page > aside .songList-container::-webkit-scrollbar{
+    width: 5px;
+}              
+.page > aside .songList-container::-webkit-scrollbar-button{
+    display: none;
+}     
+
+.page > aside .songList-container::-webkit-scrollbar-thumb{
+    background-color: #E7EAF3;
+    border-radius: 3px;
 }
 
 .page > aside  .songList{
@@ -59,23 +113,6 @@ input{font: inherit; outline: none;}
 .page > aside  .songList > li.pre-active > div{
     margin: 0;
     padding: 10px 20px;
-}
-
-.page > aside > .upload > #container{
-    border-radius: 5px;
-    width: 200px;
-    border: 2px dashed #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.page > aside > .upload > #container > #pickfiles{
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    text-align: center;
 }
 
 .page > main > .form{
@@ -114,4 +151,21 @@ input{font: inherit; outline: none;}
     border-radius: 5px;
     background-color: #fff;
     border: 1px solid #333;
+}
+
+.page > aside > .upload > #container{
+    border-radius: 5px;
+    width: 200px;
+    border: 2px dashed #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page > aside > .upload > #container > #pickfiles{
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
 }

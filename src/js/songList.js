@@ -1,47 +1,49 @@
 {
-            // <li><div>歌曲1</div></li>
-            // <li><div>歌曲2</div></li>
-            // <li class="pre-active"><div>歌曲3</div></li>
-            // <li class="active"><div>歌曲4</div></li>
-            // <li><div>歌曲5</div></li>
-            // <li><div>歌曲6</div></li>
-            // <li><div>歌曲7</div></li>
-            // <li><div>歌曲8</div></li>
-            // <li><div>歌曲9</div></li>
-            // <li><div>歌曲10</div></li>
-
-
     let view = {
         el: '.songList-container',
         template: `
         <ul class="songList"></ul>
         `,
-        render(data){
+        render(data) {
             $(this.el).html(this.template)
-            let {songs} = data
-            songs.map((song)=>{
-                $('ul').append($('<li></li>').append($('<div></div>').text(song.name)))
+            let { songs } = data
+            songs.map((song) => {
+                $('ul').prepend($('<li></li>').append($('<div></div>').text(song.name)))
             })
         },
-        clearActive(){
+        clearActive() {
             $(this.el).find('.pre-active').removeClass('pre-active').next('.active').removeClass('active')
         }
     }
     let model = {
         data: {
             songs: []
+        },
+        showData(){
+            var query = new AV.Query('Song');
+            console.log(12)
+            return query.find().then((songs)=>{
+                songs.forEach((song)=>{
+                    let {id, attributes} = song
+                    let data = {id, ...attributes}
+                    this.data.songs.push(data)
+                })
+            })
         }
     }
     let controller = {
-        init(view, model){
+        init(view, model) {
             this.view = view
             this.model = model
             this.view.render(this.model.data)
-            window.eventHub.on('upload', ()=>{
+            window.eventHub.on('upload', () => {
                 this.view.clearActive()
             })
-            window.eventHub.on('create', (data)=>{
+            window.eventHub.on('create', (data) => {
                 this.model.data.songs.push(data)
+                this.view.render(this.model.data)
+            })
+            this.model.showData().then(()=>{
                 this.view.render(this.model.data)
             })
         }
