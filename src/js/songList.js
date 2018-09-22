@@ -8,11 +8,11 @@
             $(this.el).html(this.template)
             let { songs } = data
             songs.map((song) => {
-                $('ul').prepend($('<li></li>').append($('<div></div>').text(song.name)))
+                $('ul').prepend($('<li></li>').attr('songId', song.id).append($('<div></div>').text(song.name)))
             })
         },
         clearActive() {
-            $(this.el).find('.pre-active').removeClass('pre-active').next('.active').removeClass('active')
+            $(this.el).find('.active').removeClass('active')
         }
     }
     let model = {
@@ -21,7 +21,6 @@
         },
         showData(){
             var query = new AV.Query('Song');
-            console.log(12)
             return query.find().then((songs)=>{
                 songs.forEach((song)=>{
                     let {id, attributes} = song
@@ -45,6 +44,19 @@
             })
             this.model.showData().then(()=>{
                 this.view.render(this.model.data)
+            })
+            $(this.view.el).on('click', 'li', (e)=>{
+                let li = e.currentTarget
+                $(li).addClass('active').siblings().removeClass('active')
+                let id = $(li).attr('songId')
+                let data
+                this.model.data.songs.map((song)=>{
+                    if(id === song.id){
+                        data = song
+                    }
+                })  
+                window.eventHub.emit('selector', JSON.parse(JSON.stringify(data)))
+                
             })
         }
     }
