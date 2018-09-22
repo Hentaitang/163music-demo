@@ -19,6 +19,13 @@
             window.eventHub.on('create', (data)=>{
                 this.clearActive()
             })
+            window.eventHub.on('select', (data)=>{
+                this.clearActive()
+            })
+            $(this.view.el).on('click', ()=>{
+                this.active()
+                window.eventHub.emit('new')
+            })
         },
         active(){
             $(this.view.el).addClass('active')

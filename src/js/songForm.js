@@ -29,7 +29,7 @@
             })
             $(this.el).html(html)
         },
-        reset(){
+        reset() {
             this.render({})
         }
     }
@@ -42,14 +42,22 @@
             song.set('singer', data.singer);
             song.set('url', data.url);
             return song.save().then((newSong) => {
-                let {id, attributes} = newSong
-                Object.assign(this.data, {
-                    id,
-                    ...attributes
-                })
+                let { id, attributes } = newSong
+                Object.assign(this.data, { id, ...attributes })
             }, (error) => {
                 console.error(error);
             });
+        },
+        update(data) {
+            data.id = this.data.id
+            var song = AV.Object.createWithoutData('Song', data.id);
+            song.set('name', data.name);
+            song.set('singer', data.singer);
+            song.set('url', data.url);
+            return song.save().then((newSong) => {
+                let {id, attributes} = newSong
+                Object.assign(this.data, {id, ...attributes})
+            })
         }
     }
     let controller = {
@@ -61,8 +69,12 @@
             window.eventHub.on('upload', (data) => {
                 this.view.render(data)
             })
-            window.eventHub.on('selector', (data)=>{
+            window.eventHub.on('select', (data) => {
                 Object.assign(this.model.data, data)
+                this.view.render(this.model.data)
+            })
+            window.eventHub.on('new', (data) => {
+                this.model.data = {}
                 this.view.render(this.model.data)
             })
         },
@@ -74,12 +86,16 @@
                 needs.map((string) => {
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
                 })
-                this.model.create(data).then(()=>{
-                    this.view.reset()
-                    let string = JSON.stringify(this.model.data)
-                    let object = JSON.parse(string)
-                    window.eventHub.emit('create', object)
-                })
+                if (!this.model.data.id) {
+                    this.model.create(data).then(() => {
+                        this.view.reset()
+                        window.eventHub.emit('create', JSON.parse(JSON.stringify(this.model.data)))
+                    })
+                } else {
+                    this.model.update(data).then(() => {
+                        window.eventHub.emit('update', JSON.parse(JSON.stringify(this.model.data)))
+                    })
+                }
             })
         }
         // reset(data){

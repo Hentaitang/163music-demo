@@ -13,6 +13,9 @@
         },
         clearActive() {
             $(this.el).find('.active').removeClass('active')
+        },
+        active(selector){
+            $(selector).addClass('active').siblings('.active').removeClass('active')
         }
     }
     let model = {
@@ -34,7 +37,28 @@
         init(view, model) {
             this.view = view
             this.model = model
+            this.bindEventHub()
             this.view.render(this.model.data)
+            this.bindEvents()
+            this.model.showData().then(()=>{
+                this.view.render(this.model.data)
+            })
+            
+        },
+        bindEvents(){
+            $(this.view.el).on('click', 'li', (e)=>{
+                this.view.active(e.currentTarget)
+                let id = $(e.currentTarget).attr('songId')
+                let data
+                this.model.data.songs.map((song)=>{
+                    if(id === song.id){
+                        data = song
+                    }
+                })  
+                window.eventHub.emit('select', JSON.parse(JSON.stringify(data)))
+            })
+        },
+        bindEventHub(){
             window.eventHub.on('upload', () => {
                 this.view.clearActive()
             })
@@ -42,21 +66,17 @@
                 this.model.data.songs.push(data)
                 this.view.render(this.model.data)
             })
-            this.model.showData().then(()=>{
-                this.view.render(this.model.data)
+            window.eventHub.on('new', (data)=>{
+                this.view.clearActive()
             })
-            $(this.view.el).on('click', 'li', (e)=>{
-                let li = e.currentTarget
-                $(li).addClass('active').siblings().removeClass('active')
-                let id = $(li).attr('songId')
-                let data
+            window.eventHub.on('update', (data)=>{
                 this.model.data.songs.map((song)=>{
-                    if(id === song.id){
-                        data = song
+                    if(song.id === data.id){
+                        Object.assign(song, data)
                     }
-                })  
-                window.eventHub.emit('selector', JSON.parse(JSON.stringify(data)))
-                
+                })
+                this.view.render(this.model.data)
+                this.view.active(`[songid="${data.id}"]`)
             })
         }
     }
