@@ -1,24 +1,24 @@
 {
     let view = {
-        el: '.page > main',
+        el: '.page > main  .wrapper',
         template: `
-        <form class="form">
-            <div class="row">
-                <label for="songName">歌名</label>
-                <input name="name" type="text" id="songName" value="__name__">
-            </div>
-            <div class="row">
-                <label for="singer">歌手</label>
-                <input name="singer" type="text" id="singer" value="__singer__">
-            </div>
-            <div class="row">
-                <label for="url">链接</label>
-                <input name="url" type="text" id="url" value="__url__">
-            </div>
-            <div class="row active">
-                <input type="submit" value="保存">
-            </div>
-        </form>
+            <form class="form">
+                <div class="row">
+                    <label for="songName">歌名</label>
+                    <input name="name" type="text" id="songName" value="__name__">
+                </div>
+                <div class="row">
+                    <label for="singer">歌手</label>
+                    <input name="singer" type="text" id="singer" value="__singer__">
+                </div>
+                <div class="row">
+                    <label for="url">链接</label>
+                    <input name="url" type="text" id="url" value="__url__">
+                </div>
+                <div class="row active">
+                    <input type="submit" value="保存">
+                </div>
+            </form>
         `,
         render(data = {}) {
             let placeholders = ['name', 'singer', 'url', 'id']
@@ -27,14 +27,15 @@
                 html = html.replace(`__${string}__`, data[string] || '')
             })
             $(this.el).html(html)
-            if(!data.id){
-                $(this.el).prepend('<h1>新建歌曲</h1>')
-            }else{
-                $(this.el).prepend('<h1>编辑歌曲</h1>')
+            if (!data.id) {
+                $(this.el).siblings('.upload').addClass('show').siblings('.show').removeClass('show')
+            } else {
+                $(this.el).addClass('show').siblings('.show').removeClass('show')
             }
         },
-        reset() {
-            this.render({})
+        reset(data) {
+            this.render(data)
+            $(this.el).addClass('show').siblings('.show').removeClass('show')
         }
     }
     let model = {
@@ -59,8 +60,8 @@
             song.set('singer', data.singer);
             song.set('url', data.url);
             return song.save().then((newSong) => {
-                let {id, attributes} = newSong
-                Object.assign(this.data, {id, ...attributes})
+                let { id, attributes } = newSong
+                Object.assign(this.data, { id, ...attributes })
             })
         }
     }
@@ -68,8 +69,8 @@
         init(view, model) {
             this.view = view
             this.model = model
-            this.bindEvent()
             this.view.render(this.model.data)
+            this.bindEvent()
             window.eventHub.on('select', (data) => {
                 Object.assign(this.model.data, data)
                 this.view.render(this.model.data)
@@ -79,9 +80,8 @@
                 if(!data){
                     this.view.render(this.model.data)
                 }else{
-                    this.view.render(data)
+                    this.view.reset(data)
                 }
-                
             })
         },
         bindEvent() {
@@ -92,16 +92,20 @@
                 needs.map((string) => {
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
                 })
-                if (!this.model.data.id) {
-                    this.model.create(data).then(() => {
-                        this.view.reset()
-                        window.eventHub.emit('create', JSON.parse(JSON.stringify(this.model.data)))
-                    })
+                if (data.name) {
+                    if (!this.model.data.id) {
+                        this.model.create(data).then(() => {
+                            window.eventHub.emit('create', JSON.parse(JSON.stringify(this.model.data)))
+                        })
+                    } else {
+                        this.model.update(data).then(() => {
+                            window.eventHub.emit('update', JSON.parse(JSON.stringify(this.model.data)))
+                        })
+                    }
                 } else {
-                    this.model.update(data).then(() => {
-                        window.eventHub.emit('update', JSON.parse(JSON.stringify(this.model.data)))
-                    })
+                    alert('请输入歌曲信息')
                 }
+
             })
         }
         // reset(data){

@@ -65,8 +65,11 @@ input{font: inherit; outline: none;}
 .page > main{
     flex-grow: 1;
     background-color: #FAFAFA;
-    padding-left: 20px;
     margin-top: 60px;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .page > aside > .newSong{
@@ -115,36 +118,56 @@ input{font: inherit; outline: none;}
     padding: 10px 20px;
 }
 
-.page > main > .form{
+.page > main > .all-wrapper{
+    width: 998px;
+    height: 460px;
+    overflow: auto;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(63, 58, 58, 0.5);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page > main  .wrapper{
+    display: none;
+}
+
+.page > main  .wrapper.show{
+    display: block;
+}
+
+.page > main  .wrapper > .form{
     padding-top: 20px;
 }
 
-.page > main > .form > .row{
+.page > main  .wrapper > .form > .row{
     margin: 20px 0;
     display: flex;
     align-items: center;
 }
 
-.page > main > .form > .row.active{
+.page > main  .wrapper > .form > .row.active{
     margin-left: calc(4em + 5px);
 }
 
-.page > main > .form > .row > label{
+.page > main  .wrapper > .form > .row > label{
     text-align: right;
     margin-right: 5px;
     width: 4em;
 }
 
-.page > main > .form > .row > input[type="text"]{
+.page > main  .wrapper > .form > .row > input[type="text"]{
     padding: 3px 8px;
     border-radius: 5px;
     border: 1px solid #333;
     height: 30px;
 }
 
-.page > main > .form > .row > input[type="submit"],
-.page > main > .form > .row > input[type="button"],
-.page > main > .form > .row > button{
+.page > main  .wrapper > .form > .row > input[type="submit"],
+.page > main  .wrapper > .form > .row > input[type="button"],
+.page > main  .wrapper > .form > .row > button{
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
@@ -153,19 +176,86 @@ input{font: inherit; outline: none;}
     border: 1px solid #333;
 }
 
-.page > aside > .upload > #container{
+.page > main  .upload{
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.page > main  .upload.show{
+    display: block;
+}
+
+.page > main  .upload > #container{
     border-radius: 5px;
-    width: 200px;
-    border: 2px dashed #ddd;
+    width: 100%;
+    height: 100%;
+    
+}
+
+.page > main  .upload > #container > #pickfiles{
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.page > aside > .upload > #container > #pickfiles{
+    flex-direction: column;
     cursor: pointer;
     width: 100%;
     height: 100%;
     padding: 20px;
     text-align: center;
+}
+
+.page > main  .upload > #container > #pickfiles > span{
+    font-size: 23px;
+    font-family: bold;
+}
+
+.page > main  .upload > #container > #pickfiles > p{
+    font-size: 16px;
+    color: #666666;
+}
+
+.page > main  .upload img{
+    width: 90px;
+    height: 94px;
+    margin-bottom: 30px;
+}
+
+.page > main .upload > .progress{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.page > main .upload > .progress p{
+    font-size: 20px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.page > main .upload > .progress > span{
+    margin-left: 10px;
+    color: #B29999;
+}
+
+.page > main  .upload  .progressBar{
+    height: 20px;
+    width: 705px;
+    overflow: hidden;
+    background-color: #E7EAF3;
+    border-radius: 10px;
+}
+
+.page > main  .upload  .progressBar > .inside{
+    height: 100%;
+    width: 100%;
+    transform: translate(-100%);
+    background-color: #F06B67;
+    transition: all 1s;
+    border-radius: 10px;
 }

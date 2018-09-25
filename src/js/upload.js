@@ -4,13 +4,30 @@
         template: `
         <div id="container">
             <div id="pickfiles">
-                <span>点击或拖拽文件</span>
-                <p>文件大小不能超过 40MB</p>
+                <img src="./img/duoduo.png">
+                <span>点击上传音乐</span>
+                <p>拖拽音乐到此处也可上传</p>
             </div>
+        </div>
+        <div class="progress">
+            <p>上传中...</p>
+            <div class="progressBar">
+                <div class="inside"></div>
+            </div>
+            <span>0%</span>
         </div>
         `,
         render(data) {
             $(this.el).html(this.template)
+            $(this.el).find('#container').show().siblings('.progress').hide()
+            // $(this.el).find('#container').hide().siblings('.progress').show()
+        },
+        hide(data){
+            $(this.el).find('#container').hide().siblings('.progress').show()
+            $(this.el).find('.progress > span').text(`${data}%`)
+        },
+        show(){
+            $(this.el).find('#container').show().siblings('.progress').hide()
         }
     }
     let model = {}
@@ -36,31 +53,33 @@
                 chunk_size: '4mb',                  // 分块上传时，每块的体积
                 auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
                 init: {
-                    'FilesAdded': function (up, files) {
-                        plupload.each(files, function (file) {
+                    'FilesAdded': (up, files)=>{
+                        plupload.each(files, function (file){
                             // 文件添加进队列后,处理相关的事情
                         });
                     },
-                    'BeforeUpload': function (up, file) {
-                        // 每个文件上传前,处理相关的事情
+                    'BeforeUpload': (up, file)=>{
+                        $(this.view.el).find('.inside').css('transform', 'translate(-100%)')
                     },
-                    'UploadProgress': function (up, file) {
-                        // 每个文件上传时,处理相关的事情
-
+                    'UploadProgress': (up, file)=>{
+                        let progress = file.percent
+                        this.view.hide(progress)
+                        $(this.view.el).find('.inside').css("transform", `translate(-${100 - progress}%)`)
                     },
-                    'FileUploaded': function (up, file, info) {
+                    'FileUploaded': (up, file, info)=>{
+                        this.view.show()
                         var domain = up.getOption('domain');
                         var response = JSON.parse(info.response);
                         var sourceLink = domain + '/' + encodeURIComponent(response.key);
-                        window.eventHub.emit('new', {url: sourceLink, name: response.key})
+                        window.eventHub.emit('new', { url: sourceLink, name: response.key })
                         //命名空间实现模块数据交互
                         // window.app.newSong.active()
                         // window.app.songForm.reset({link: sourceLink, key: response.key})
                     },
-                    'Error': function (up, err, errTip) {
+                    'Error': (up, err, errTip)=>{
                         //上传出错时,处理相关的事情
                     },
-                    'UploadComplete': function () {
+                    'UploadComplete': ()=>{
                         //队列文件处理完毕后,处理相关的事情
                     }
                 }
@@ -68,5 +87,4 @@
         }
     }
     controller.init(view, model)
-
 }
