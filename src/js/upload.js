@@ -20,7 +20,6 @@
         render(data) {
             $(this.el).html(this.template)
             $(this.el).find('#container').show().siblings('.progress').hide()
-            // $(this.el).find('#container').hide().siblings('.progress').show()
         },
         hide(data){
             $(this.el).find('#container').hide().siblings('.progress').show()

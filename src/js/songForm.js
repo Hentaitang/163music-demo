@@ -4,15 +4,15 @@
         template: `
             <form class="form">
                 <div class="row">
-                    <label for="songName">歌名</label>
+                    <label for="songName">歌名：</label>
                     <input name="name" type="text" id="songName" value="__name__">
                 </div>
                 <div class="row">
-                    <label for="singer">歌手</label>
+                    <label for="singer">歌手：</label>
                     <input name="singer" type="text" id="singer" value="__singer__">
                 </div>
                 <div class="row">
-                    <label for="url">链接</label>
+                    <label for="url">链接：</label>
                     <input name="url" type="text" id="url" value="__url__">
                 </div>
                 <div class="row active">
@@ -31,11 +31,13 @@
                 $(this.el).siblings('.upload').addClass('show').siblings('.show').removeClass('show')
             } else {
                 $(this.el).addClass('show').siblings('.show').removeClass('show')
+                $(this.el).prepend('<p>编辑歌曲信息</p>')
             }
         },
         reset(data) {
             this.render(data)
             $(this.el).addClass('show').siblings('.show').removeClass('show')
+            $(this.el).prepend('<p>上传成功！请编辑歌曲信息！</p>')
         }
     }
     let model = {

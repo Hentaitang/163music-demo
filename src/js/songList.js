@@ -8,7 +8,21 @@
             $(this.el).html(this.template)
             let { songs } = data
             songs.map((song) => {
-                $('ul').prepend($('<li></li>').attr('songId', song.id).append($('<div></div>').text(song.name)))
+                $('ul').prepend($(`
+                <li>
+                    <svg class="icon-music" aria-hidden="true">
+                        <use xlink:href="#icon-yinle"></use>
+                    </svg>
+                    <div class="wrapper">
+                        <span>${song.name}</span>
+                        <div class="introduction">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-user"></use>
+                            </svg>
+                            <span>${song.singer}</span>
+                        </div>
+                    </div>
+                </li>`).attr('songId', song.id))
             })
         },
         clearActive() {

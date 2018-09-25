@@ -1,7 +1,12 @@
 {
     let view = {
         el: '.newSong',
-        template: `新建歌曲`,
+        template: `
+        <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jia"></use>
+        </svg>
+        <span>新建歌曲</span>
+        `,
         render(data){
             $(this.el).html(this.template)
         },
