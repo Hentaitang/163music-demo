@@ -81,6 +81,7 @@ input{font: inherit; outline: none;}
     color: #333333;
     border: 1px solid #ddd;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .page > aside > .newSong > .icon{
