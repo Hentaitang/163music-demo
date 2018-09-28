@@ -73,11 +73,6 @@ body{ font-size: 15px; color: #333333;}
     left: 0;
 }
 
-.recommend{
-    background-color: #FCFCFD;
-    padding-top: 104px;
-}
-
 .recommend > p{
     margin: 17px 0;
     padding-left: 9px;
@@ -108,7 +103,7 @@ body{ font-size: 15px; color: #333333;}
 
 .recommend > .songList > ul > li{
     float: left;
-    width: 32.8%;
+    width: 32.7%;
     font-size: 13px;
 }
 
@@ -185,4 +180,18 @@ body{ font-size: 15px; color: #333333;}
     display: block;
     margin: 0 auto;
     height: 150px;
+}
+
+.recommend,
+.hotSong,
+.search{
+    display: none;
+    background-color: #FCFCFD;
+    padding-top: 104px;
+}
+
+.recommend.active,
+.hotSong.active,
+.search.active{
+    display: block;
 }

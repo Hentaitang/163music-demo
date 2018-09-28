@@ -3,17 +3,17 @@
         el: '#topBar',
         template: `
         <ul class="tabs">
-            <li class="active">
+            <li class="active" data-name="recommend">
                 <div>
                     推荐音乐
                 </div>
             </li>
-            <li>
+            <li data-name="hotSong">
                 <div>
                     热歌榜
                 </div>
             </li>
-            <li>
+            <li data-name="search">
                 <div>
                     搜索
                 </div>
@@ -24,6 +24,8 @@
             $(this.el).append(this.template)
         },
         active(el){
+            console.log($(`#${$(el).attr('data-name')}`))
+            $(`#${$(el).attr('data-name')}`).addClass('active').siblings().removeClass('active')
             $(el).addClass('active').siblings().removeClass('active')
         }
     }
