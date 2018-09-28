@@ -9,6 +9,7 @@ body{ font-size: 15px; color: #333333;}
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 1;
 }
 
 .topBar > .top{
@@ -101,25 +102,25 @@ body{ font-size: 15px; color: #333333;}
     padding-bottom: 6px;
 }
 
-.recommend ul{
+.recommend > .songList > ul{
     margin-bottom: 16px;
 }
 
-.recommend ul > li{
+.recommend > .songList > ul > li{
     float: left;
     width: 32.8%;
     font-size: 13px;
 }
 
-.recommend ul > li > img{
+.recommend > .songList > ul > li > img{
     width: 100%;
 }
 
-.recommend ul > li:nth-child(1){
+.recommend > .songList > ul > li:nth-child(1){
     margin-right: 3px;
 }
 
-.recommend ul > li:nth-child(3){
+.recommend > .songList > ul > li:nth-child(3){
     margin-left: 3px;
 }
 
@@ -129,7 +130,7 @@ body{ font-size: 15px; color: #333333;}
     clear: both;
 }
 
-.recommend ul > li > p{
+.recommend > .songList > ul > li > p{
     padding: 2px 2px 0 6px;
     height: 2.5em;
     line-height: 1.2em;
@@ -140,3 +141,47 @@ body{ font-size: 15px; color: #333333;}
     -webkit-box-orient: vertical;
 }
 
+.recommend > .songs > li{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EFEFF0;
+    font-size: 17px;
+    position: relative;
+    margin-left: 10px;
+    padding: 6px 0;
+}
+
+.recommend > .songs > li > .song > .name{
+    line-height: 25px;
+}
+
+.recommend > .songs > li > .song > p{
+    font-size: 12px;
+    line-height: 18px;
+    color: #888;
+}
+
+.recommend > .songs > li .play{
+    position: absolute;
+    right: 0;
+    background-image: url(../img/index-icon.png);
+    background-position: -24px 0;
+    background-size: 166px 97px;
+    height: 22px;
+    width: 22px;
+    margin: 0 10px;
+}
+
+.recommend > footer{
+    background-image: url(../img/footer.png);
+    background-position: center center;
+    background-size: cover;
+}
+
+.recommend > footer > svg{
+    width: 230px;
+    height: 44px;
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+}

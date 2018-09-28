@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="topBar">
+    <div class="topBar" id="topBar">
         <div class="top">
             <svg class="topsvg" viewBox="0 0 1238 231" xmlns="http://www.w3.org/2000/svg" data-reactid="6">
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" data-reactid="7">
@@ -53,63 +53,12 @@
             </svg>
             <span>下载APP</span>
         </div>
-        <ul class="tabs">
-            <li class="active">
-                <div>
-                    推荐音乐
-                </div>
-            </li>
-            <li>
-                <div>
-                    热歌榜
-                </div>
-            </li>
-            <li>
-                <div>
-                    搜索
-                </div>
-            </li>
-        </ul>
     </div>
-    <div class="recommend">
+    <div class="recommend" id="recommend">
         <p>推荐歌单</p>
-        <div class="songList">
-            <ul class="clearfix">
-                <li>
-                    <img src="./img/1.webp">
-                    <p>再见臧天朔，一路走好。</p>
-                </li>
-                <li>
-                    <img src="./img/2.webp">
-                    <p>【日系恋爱】其实从很久以前，我就很喜欢你</p>
-                </li>
-                <li>
-                    <img src="./img/3.webp">
-                    <p>【女声控】天籁之音，声线美到窒息「六」</p>
-                </li>
-            </ul>
-            <ul class="clearfix">
-                <li>
-                    <img src="./img/4.webp">
-                    <p>〖日系〗愿你一生温柔相许~</p>
-                </li>
-                <li>
-                    <img src="./img/5.webp">
-                    <p>ฅ 可爱进行时 ฅ 将卖萌进行到底 ฅ</p>
-                </li>
-                <li>
-                    <img src="./img/6.webp">
-                    <p>歌词唱透了心声，回忆模糊了眼眸</p>
-                </li>
-            </ul>
-        </div>
+        <div class="songList" id="songList"></div>
         <p>最新音乐</p>
-        <ul>
-            <li>
-                <div class="song"></div>
-            </li>
-            <li></li>
-            <li></li>
+        <ul class="songs" id="newSong"> 
         </ul>
         <footer>
             <svg class="logosvg" viewBox="0 0 1238 231" xmlns="http://www.w3.org/2000/svg">
@@ -163,6 +112,11 @@
     </div>
     <div class="hotSong"></div>
     <div class="search"></div>
+    <script src="../vendors/jquery.min.js"></script>
+    <script src="../vendors/av-min.js"></script>
+    <script src="./js/initializers/av.js"></script>
+    <script src="./js/home/tabs.js"></script>
+    <script src="./js/home/songList.js"></script>
+    <script src="./js/home/newSong.js"></script>
 </body>
-
 </html>
