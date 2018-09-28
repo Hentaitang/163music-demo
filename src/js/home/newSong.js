@@ -5,23 +5,46 @@
             <li>
                 <div class="song">
                     <div class="name">
-                        一江水 (超级剧集《天坑鹰猎》概念主题曲)
+                       {{songName}}
                     </div>
-                    <p>毛不易</p>
+                    <p>{{singer}}</p>
                 </div>
                 <div class="play"></div>
             </li>
         `,
-        render(data){
-            $(this.el).html(this.template)
+        render(data) {
+            data.map((song) => {
+                let $li = $(this.template.replace('{{songName}}', song.name)
+                    .replace('{{singer}}', song.singer))
+                $(this.el).append($li)
+            })
         }
     }
-    let model = {}
+    let model = {
+        data: [],
+        getSong() {
+            let query = new AV.Query('Song')
+            var now = new Date();
+            query.descending('createdAt');
+            query.lessThanOrEqualTo('createdAt', now);//查询今天之前创建的 Todo
+            query.limit(10);// 最多返回 10 条结果
+            let hash
+            return query.find().then((songs) => {
+                songs.map((song) => {
+                    hash = { id: song.id, ...song.attributes }
+                    this.data.push(hash)
+                })
+            })
+            
+        }
+    }
     let controller = {
-        init(view, model){
+        init(view, model) {
             this.view = view
             this.model = model
-            this.view.render()
+            this.model.getSong().then(() => {
+                this.view.render(this.model.data)
+            })
         }
     }
     controller.init(view, model)
