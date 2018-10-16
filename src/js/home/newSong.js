@@ -2,20 +2,24 @@
     let view = {
         el: '#recommend > #newSong',
         template: `
-            <li>
+            <a href="./song.html?id={{songId}}">
                 <div class="song">
                     <div class="name">
                        {{songName}}
                     </div>
-                    <p>{{singer}}</p>
+                    <p>
+                        <span></span>
+                        {{singer}}
+                    </p>
                 </div>
                 <div class="play"></div>
-            </li>
+            </a>
         `,
         render(data) {
             data.map((song) => {
                 let $li = $(this.template.replace('{{songName}}', song.name)
-                    .replace('{{singer}}', song.singer))
+                    .replace('{{songId}}', song.id)
+                    .replace('{{singer}}', song.singer)).addClass(song.id)
                 $(this.el).append($li)
             })
         }
@@ -44,6 +48,13 @@
             this.model = model
             this.model.getSong().then(() => {
                 this.view.render(this.model.data)
+            })
+            this.bindEvent()
+        },
+        bindEvent(){
+            $(this.view.el).on('click', 'li', (e)=>{
+                let id = $(e.currentTarget).attr('class')
+                window.location.hash = id
             })
         }
     }

@@ -24,7 +24,6 @@
             $(this.el).append(this.template)
         },
         active(el){
-            console.log($(`#${$(el).attr('data-name')}`))
             $(`#${$(el).attr('data-name')}`).addClass('active').siblings().removeClass('active')
             $(el).addClass('active').siblings().removeClass('active')
         }
