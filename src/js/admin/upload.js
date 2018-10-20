@@ -43,7 +43,7 @@
                 browse_button: 'pickfiles',         // 上传选择的点选按钮，**必需**
                 uptoken_url: 'http://localhost:8888/uptoken',         // Ajax 请求 uptoken 的 Url，**强烈建议设置**（服务端提供）
                 get_new_uptoken: false,             // 设置上传文件的时候是否每次都重新获取新的 uptoken
-                domain: 'http://pf8otoovm.bkt.clouddn.com',     // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
+                domain: 'http://pgwjrv1fw.bkt.clouddn.com',     // bucket 域名，下载资源时用到，如：'http://xxx.bkt.clouddn.com/' **必需**
                 container: 'container',             // 上传区域 DOM ID，默认是 browser_button 的父元素，
                 max_file_size: '40mb',             // 最大文件体积限制
                 max_retries: 3,                     // 上传失败最大重试次数

@@ -1,5 +1,6 @@
 *{padding: 0; margin: 0;}
 *{box-sizing: border-box;}
+*{font-family: Helvetica, sans-serif;}
 
 .page{
     width: 100vw;
@@ -13,7 +14,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(http://p2.music.126.net/0lf5u7IPCj0C7A0Ps-YBFg==/109951163576703713.webp?imageView&thumbnail=720y720&quality=75&tostatic=0&type=webp);
+    background-image: url(about:blank);
     transform: scale(1.5);
     background-position: center center;
     background-size: cover;
@@ -40,7 +41,7 @@
 }
 
 .needle{
-    width: 26.6%;
+    width: 25.6%;
     max-width: 110px;
     position: absolute;
     top: 0;
@@ -52,33 +53,59 @@
 .wrapper{
     width: 78.9%;
     max-width: 342px;
-    padding-top: 63px;
     position: absolute;
+    top: 10.5%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
 }
 
-.wrapper .cd .dist{
-    width: 100%;
+.wrapper .cd{
     position: relative;
 }
 
+.wrapper .cd .dist{
+    width: 100%;
+}
+
+.wrapper .cd .light{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .wrapper .cd .dist-cover{
-    width: 64%;
+    width: 62%;
+    border-radius: 50%;
     max-width: 212px;
     position: absolute;
-    top: 59%;
+    top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
 
 .wrapper .cd .cover{
     width: 100%;
+    border-radius: 50%;
+    animation: rotate 20s infinite linear;
+    animation-play-state: paused;
 }
 
-.wrapper .cd .dist-cover.play .cover{
-    animation: rotate 15s infinite linear;
+.wrapper .cd .dist-cover .play{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 30%;
+}
+
+.wrapper .cd .dist-cover.playing .play{
+    display: none;
+}
+
+.wrapper .cd .dist-cover.playing .cover{
+    animation-play-state: running;
 }
 
 @keyframes rotate{
@@ -97,10 +124,16 @@
     width: 100vw;
 }
 
-.information h1{
+.information h2{
     font-size: 15px;
+    font-weight: 400;
     color: #fefefe;
     text-align: center;
+}
+
+.information h2 span{
+    font-size: 13px;
+    color: hsla(0,0%,100%,.6);
 }
 
 .information .lyrics{
@@ -111,14 +144,20 @@
 }
 
 @media screen and (min-width: 360px){
-    .wrapper{
-        padding-top: 70px;
-    }
-    .information h1{
+    .information h2{
         font-size: 18px;
+    }
+    .information h2 span{
+        font-size: 16px;
     }
     .information .lyrics{
         font-size: 16px;
+    }
+}
+
+@media screen and (min-height: 736px){
+    .wrapper{
+        top: 70px;
     }
 }
 

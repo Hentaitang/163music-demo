@@ -2,20 +2,30 @@
     let view = {
         el: '#app',
         template: `
-            <audio controls src={{url}}></audio>
-            <div>
-                <button class="play">播放</button>
-                <button class="pause">暂停</button>
-            <div>
+            <audio src={{url}}></audio>
         `,
         render(song){
-            $(this.el).html(this.template.replace('{{url}}', song.url))
+            if(song.cover){
+                $(this.el).find('.background').css('background-image', `url(${song.cover})`)
+                $(this.el).find('.cover').attr('src', `${song.cover}`)
+            }
+            $(this.el).find('.information > h2').html(song.name+ ' - ' + `<span>${song.singer}</span>`)
+            $(this.el).append(this.template.replace('{{url}}', song.url))
+        },
+        control(){
+            if($(this.el).find('.dist-cover').hasClass('playing')){
+                this.pause()
+            }else{
+                this.play()
+            }
         },
         play(){
+            $(this.el).find('.dist-cover').addClass('playing')
             let audio = $(this.el).find('audio')[0]
             audio.play()
         },
         pause(){
+            $(this.el).find('.playing').removeClass('playing')
             let audio = $(this.el).find('audio')[0]
             audio.pause()
         }
@@ -26,6 +36,7 @@
             name: '',
             singer: '',
             url: ''
+            
         },
         getSong(id){
             var query = new AV.Query('Song');
@@ -63,11 +74,8 @@
             return id
         },
         bindEvent(){
-            $(this.view.el).on('click', '.play', ()=>{
-                this.view.play()
-            })
-            $(this.view.el).on('click', '.pause', ()=>{
-                this.view.pause()
+            $(this.view.el).on('click', '.wrapper > .cd > .dist-cover', ()=>{
+                this.view.control()
             })
         }
     }
