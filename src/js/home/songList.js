@@ -4,29 +4,29 @@
         template: `
             <ul class="clearfix">
                 <li>
-                    <img src="./img/1.webp">
+                    <img src="./img/1.jpg">
                     <p>再见臧天朔，一路走好。</p>
                 </li>
                 <li>
-                    <img src="./img/2.webp">
+                    <img src="./img/2.jpg">
                     <p>【日系恋爱】其实从很久以前，我就很喜欢你</p>
                 </li>
                 <li>
-                    <img src="./img/3.webp">
+                    <img src="./img/3.jpg">
                     <p>【女声控】天籁之音，声线美到窒息「六」</p>
                 </li>
             </ul>
             <ul class="clearfix">
                 <li>
-                    <img src="./img/4.webp">
+                    <img src="./img/4.jpg">
                     <p>〖日系〗愿你一生温柔相许~</p>
                 </li>
                 <li>
-                    <img src="./img/5.webp">
+                    <img src="./img/5.jpg">
                     <p>ฅ 可爱进行时 ฅ 将卖萌进行到底 ฅ</p>
                 </li>
                 <li>
-                    <img src="./img/6.webp">
+                    <img src="./img/6.jpg">
                     <p>歌词唱透了心声，回忆模糊了眼眸</p>
                 </li>
             </ul>

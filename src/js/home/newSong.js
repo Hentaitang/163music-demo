@@ -35,7 +35,7 @@
             let hash
             return query.find().then((songs) => {
                 songs.map((song) => {
-                    hash = { id: song.id, ...song.attributes }
+                    hash = Object.assign({id: song.id}, song.attributes)
                     this.data.push(hash)
                 })
             })
