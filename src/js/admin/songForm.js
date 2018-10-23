@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <label for="lyrics">歌词：</label>
-                    <textarea name="lyrics" id="lyrics"></textarea>
+                    <textarea name="lyrics" id="lyrics">__lyrics__</textarea>
                 </div>
                 <div class="row active">
                     <input type="submit" value="保存">
@@ -29,7 +29,7 @@
             </form>
         `,
         render(data = {}) {
-            let placeholders = ['name', 'singer', 'url', 'id', 'cover']
+            let placeholders = ['name', 'singer', 'url', 'id', 'cover', 'lyrics']
             let html = this.template
             placeholders.map((string) => {
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -49,7 +49,7 @@
         }
     }
     let model = {
-        data: { name: '', singer: '', url: '', id: '' , cover: ''},
+        data: { name: '', singer: '', url: '', id: '' , cover: '', lyrics: ''},
         create(data) {
             var Song = AV.Object.extend('Song');
             var song = new Song();
@@ -57,6 +57,7 @@
             song.set('singer', data.singer);
             song.set('url', data.url);
             song.set('cover', data.cover);
+            song.set('lyrics', data.lyrics);
             return song.save().then((newSong) => {
                 let { id, attributes } = newSong
                 Object.assign(this.data, { id, ...attributes })
@@ -71,6 +72,7 @@
             song.set('singer', data.singer);
             song.set('url', data.url);
             song.set('cover', data.cover);
+            song.set('lyrics', data.lyrics);
             return song.save().then((newSong) => {
                 let { id, attributes } = newSong
                 Object.assign(this.data, { id, ...attributes })
@@ -100,7 +102,7 @@
             $(this.view.el).on('submit', 'form', (e) => {
                 e.preventDefault()
                 let data = {}
-                let needs = 'name singer url cover'.split(' ')
+                let needs = 'name singer url cover lyrics'.split(' ')
                 needs.map((string) => {
                     data[string] = $(this.view.el).find(`[name="${string}"]`).val()
                 })
