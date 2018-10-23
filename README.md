@@ -13,3 +13,5 @@
 (1)前端页面使用JQuery、iconfont、CSS3、MVC、AJAX
 
 (2)后端页面使用LeanCloud数据存储API、七牛上传接口
+
+![](http://pgwjrv1fw.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20181023210126.png)
