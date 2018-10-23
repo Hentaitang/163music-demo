@@ -1,5 +1,6 @@
 # 仿网易云音乐
-仿网易云音乐，包含[管理页面](https://hentaitang.github.io/163music-demo/src/admin.html)
+项目[预览链接](https://hentaitang.github.io/163music-demo/src/index.html)
+手机端仿网易云音乐，包含[管理页面](https://hentaitang.github.io/163music-demo/src/admin.html)
 
 1.此项目为手机端项目，可在线听歌、查看歌词
 
