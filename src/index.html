@@ -111,9 +111,18 @@
                 </svg>
             </footer>
         </div>
-        <div class="hotSong" id="hotSong">热门歌曲</div>
+        <div class="hotSong" id="hotSong">
+            <div class="topMessage">
+                <img src="./img/topPicture.jpg">
+                <div class="rankImg">
+                    <div class="hotImg"></div>
+                    <div class="hotTime">更新日期：10月23日</div>
+                </div>
+            </div>
+            <ul class="songs" id="newSong"></ul>
+        </div>
         <div class="search" id="search">
-            <input type="text">
+            暂未添加搜索功能
         </div>
     </main>
     <script src="../vendors/jquery.min.js"></script>
@@ -122,5 +131,6 @@
     <script src="./js/home/tabs.js"></script>
     <script src="./js/home/songList.js"></script>
     <script src="./js/home/newSong.js"></script>
+    <script src="./js/home/hotSong.js"></script>
 </body>
 </html>

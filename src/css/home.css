@@ -3,6 +3,7 @@
 *::after, *::before{box-sizing: border-box;}
 li{list-style: none;}
 body{ font-size: 15px; color: #333333;}
+html{background-color: #FCFCFD;}
 
 .topBar{
     position: fixed;
@@ -157,18 +158,21 @@ body{ font-size: 15px; color: #333333;}
     color: #333333;
 }
 
-.recommend > .songs > a > .song > .name{
+.recommend > .songs > a > .song > .name,
+.hotSong .songs > a  .song > .name{
     line-height: 25px;
 }
 
-.recommend > .songs > a > .song > p{
+.recommend > .songs > a > .song > p,
+.hotSong  .songs > a  .song > p{
     font-size: 12px;
     line-height: 18px;
     color: #888;
     height: 18px;
 }
 
-.recommend > .songs > a > .song > p > span{
+.recommend > .songs > a > .song > p > span,
+.hotSong  .songs > a  .song > p > span{
     width: 12px;
     height: 8px;
     background-size: 160px;
@@ -176,7 +180,8 @@ body{ font-size: 15px; color: #333333;}
     background-image: url("../img/index-icon.png");
 }
 
-.recommend > .songs > a .play{
+.recommend > .songs > a .play,
+.hotSong  .songs > a .play{
     position: absolute;
     right: 0;
     background-image: url(../img/index-icon.png);
@@ -205,7 +210,6 @@ body{ font-size: 15px; color: #333333;}
 .hotSong,
 .search{
     display: none;
-    background-color: #FCFCFD;
     padding-top: 104px;
 }
 
@@ -213,4 +217,76 @@ body{ font-size: 15px; color: #333333;}
 .hotSong.active,
 .search.active{
     display: block;
+}
+
+main > .hotSong > .topMessage{
+    position: relative;
+    height: 161px;
+    width: 100%;
+}
+
+main > .hotSong > .topMessage > img{
+    height: 100%;
+    width: 100%;
+}
+
+main > .hotSong > .topMessage > .rankImg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 161px;
+    width: 100%;
+    padding-left: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0 ,0 ,0 ,0.2);
+}
+
+main > .hotSong > .topMessage > .rankImg > .hotImg{
+    background-image: url(../img/index-icon.png);
+    width: 142px;
+    height: 67px;
+    background-position: 20px 20px;
+    background-repeat: no-repeat;
+    background-size: 166px;
+    background-position: -24px -30px;
+}
+
+main > .hotSong > .topMessage > .rankImg > .hotTime{
+    color: white;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.hotSong  .songs > a{
+    display: flex;
+    text-decoration: none;
+}
+
+.hotSong  .songs > a > .mianMessage{
+    border-bottom: 1px solid #EFEFF0;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding: 6px 0;
+    color: #333333;
+    position: relative;
+    width: 100%;
+}
+
+.hotSong  .songs > a > .number{
+    color: #999;
+    width: 28px;
+    margin: 0 10px;
+    font-size: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotSong  .songs > a:nth-child(1) > .number,
+.hotSong  .songs > a:nth-child(2) > .number,
+.hotSong  .songs > a:nth-child(3) > .number{
+    color: #df3436;
 }
