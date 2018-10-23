@@ -15,10 +15,15 @@ body{ font-size: 15px; color: #333333;}
 .topBar > .top{
     background-color: #D43C33;
     height: 64px;
-    display: flex;
-    align-items: center;
     padding: 0 10px;
     position: relative;
+}
+
+.topBar > .top > svg,
+.topBar > .top > span{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .topBar > .top > svg{
@@ -27,7 +32,6 @@ body{ font-size: 15px; color: #333333;}
 }
 
 .topBar > .top > span{
-    position: absolute;
     right: 10px;
     color: #fff;
     border: 1px solid #fff;
