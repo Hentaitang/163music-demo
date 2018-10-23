@@ -26,12 +26,6 @@
                     .replace('{{singer}}', data[i].singer)).addClass(data[i].id)
                 $(this.el).append($li)
             }
-            // data.map((song) => {
-            //     let $li = $(this.template.replace('{{songName}}', song.name)
-            //         .replace('{{songId}}', song.id)
-            //         .replace('{{singer}}', song.singer)).addClass(song.id)
-            //     $(this.el).append($li)
-            // })
         }
     }
     let model = {

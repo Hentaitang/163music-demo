@@ -27,6 +27,8 @@
                         height += 28
                     }else if(children[i].offsetHeight === 56){
                         height += 56 
+                    }else if(children[i].offsetHeight === 84){
+                        height += 84
                     }
                     if(currentTime <= time && nextTime > time || currentTime && !nextTime){
                         $(children[i]).addClass('highlight').siblings().removeClass('highlight')
