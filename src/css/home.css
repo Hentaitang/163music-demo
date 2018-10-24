@@ -290,3 +290,14 @@ main > .hotSong > .topMessage > .rankImg > .hotTime{
 .hotSong  .songs > a:nth-child(3) > .number{
     color: #df3436;
 }
+
+.hotSong .checkAll p{
+    color: #999;
+    text-align: center;
+    padding: 15px 0;
+}
+
+.search{
+    text-align: center;
+    padding-top: 134px;
+}
